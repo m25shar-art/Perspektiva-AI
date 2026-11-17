@@ -1,0 +1,99 @@
+{
+  "users": [
+    {
+      "id": "1794926701125",
+      "fullName": "Ifhfdgj  hdfgj d gdhfg",
+      "phone": "4564564456",
+      "email": "mailmark@atomicmail.io",
+      "passwordHash": "$2a$10$fd57DJT4ndLrO87YzPURsOcp5Ew.FRozr1OyuBS4VbsTyVxosha22",
+      "classes": [
+        7
+      ],
+      "subject": "Информатика",
+      "credits": 399478,
+      "createdAt": "2026-11-17T14:45:01.125Z",
+      "dailyDate": "2026-11-17",
+      "dailyCredits": 980,
+      "totalRequests": 1,
+      "tokensUsed": 310,
+      "creditsSpentTotal": 20
+    },
+    {
+      "id": "1794934294933",
+      "fullName": "Шарапов Марк Олегович",
+      "phone": "+79621394152",
+      "email": "teacher.ai@atomicmail.io",
+      "passwordHash": "$2a$10$DeIivNq20kzK.HUrpNXPxurg9UJWOFu6KSKvMXyLaBJCseqJJ6dbG",
+      "classes": [
+        7
+      ],
+      "subject": "Информатика",
+      "credits": 400000,
+      "createdAt": "2026-11-17T16:51:34.933Z"
+    },
+    {
+      "id": "1794934458752",
+      "fullName": "Markov Mark Markovich",
+      "phone": "+79621394114",
+      "email": "M5shar@yandex.ru",
+      "passwordHash": "$2a$10$KlE7XS1vS4tZLpfjX2HF1OCCQ8Ryh4Tg7GDtKaog4Rv7YUKiNW0B6",
+      "classes": [
+        7,
+        8,
+        9
+      ],
+      "subject": "Информатика",
+      "credits": 400000,
+      "createdAt": "2026-11-17T16:54:18.752Z"
+    },
+    {
+      "id": "1794934597272",
+      "fullName": "hfgj ghfghhf fkhf",
+      "phone": "+79996663322",
+      "email": "forvidio@atomicmail.io",
+      "passwordHash": "$2a$10$TDWeZACVp26YuK9iOTUUC.ePj3GYTB96i4j7SuBu3tpZvKWqHvvQO",
+      "classes": [
+        10
+      ],
+      "subject": "Физика",
+      "credits": 400000,
+      "createdAt": "2026-11-17T16:56:37.272Z",
+      "dailyDate": "2026-11-17",
+      "dailyCredits": 965
+    },
+    {
+      "id": "dev-teacher-1",
+      "fullName": "Смирнова Елена Викторовна",
+      "phone": "+7 (999) 000-00-00",
+      "email": "dev@perspektiva.ru",
+      "classes": [
+        7,
+        8,
+        9
+      ],
+      "subject": "Информатика",
+      "credits": 399802,
+      "createdAt": "2026-11-17T17:02:30.213Z",
+      "dailyDate": "2026-11-17",
+      "dailyCredits": 980
+    }
+  ],
+  "verificationCodes": {
+    "mailmark@atomicmail.io": {
+      "code": "963920",
+      "expires": 1794934516670
+    },
+    "teaher.ai@atomicmail.io": {
+      "code": "468320",
+      "expires": 1794934697129
+    },
+    "teacher.ai@atomicmail.io": {
+      "code": "944116",
+      "expires": 1794934904620
+    },
+    "forvidio@atomicmail.io": {
+      "code": "131595",
+      "expires": 1794940494408
+    }
+  }
+}

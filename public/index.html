@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ИИ-портал — МБОУ «Центр образования «Перспектива»»</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- ЭКРАН 1: ГЛАВНАЯ СТРАНИЦА -->
+  <section id="view-landing" class="view active">
+    <header class="landing-header">
+      <div class="logo-block">
+        <span class="logo-badge">П</span>
+        <div>
+          <div class="logo-title">ЦО «Перспектива»</div>
+          <div class="logo-sub">Цифровая учительская с ИИ</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline" onclick="showView('view-login')">Войти</button>
+        <button class="btn btn-primary" onclick="showView('view-reg-1')">Регистрация</button>
+      </div>
+    </header>
+
+    <main class="hero">
+      <div class="hero-content">
+        <div class="hero-tag">МБОУ «Центр образования "Перспектива"»</div>
+        <h1>Умный ИИ-помощник для каждого учителя нашей школы</h1>
+        <p>
+          Создавайте планы уроков по ФГОС, генерируйте тесты, проверяйте работы,
+          ищите актуальную информацию в интернете и создавайте иллюстрации к занятиям за секунды.
+        </p>
+
+        <div class="hero-chips">
+          <div class="hero-chip"><i data-lucide="zap"></i> 1 000 кредитов каждое утро</div>
+          <div class="hero-chip"><i data-lucide="book-open"></i> Стандарты ФГОС</div>
+          <div class="hero-chip"><i data-lucide="bot"></i> Свои ИИ-агенты</div>
+        </div>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="showView('view-reg-1')">Зарегистрироваться</button>
+          <button class="btn btn-outline btn-lg" onclick="showView('view-login')">У меня уже есть аккаунт</button>
+        </div>
+      </div>
+
+      <!-- Правая часть: витрина с фото школы и парящими карточками -->
+      <div class="hero-showcase">
+        <div class="hero-glow"></div>
+
+        <div class="floating-card fc-top-left">
+          <span class="fc-emoji">🦉</span>
+          <div class="fc-text">
+            <strong>ИИ-агент:</strong> План урока по информатике готов!
+          </div>
+          <i data-lucide="check-circle-2" class="fc-check"></i>
+        </div>
+
+        <div class="hero-image-wrap">
+          <img src="images/school.jpg" alt="МБОУ Центр образования Перспектива" class="hero-image" />
+          <div class="hero-image-caption">МБОУ «Центр образования "Перспектива"»</div>
+        </div>
+
+        <div class="floating-card fc-bottom-right">
+          <div class="fc-row">
+            <i data-lucide="palette" class="fc-icon-burgundy"></i>
+            <span>Генератор иллюстраций для слайдов (4 модели)</span>
+          </div>
+          <div class="fc-subrow">
+            <i data-lucide="sparkles" class="fc-icon-burgundy"></i>
+            <span>GPT 6.1 • Claude • Gemini</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Блок возможностей цифровой учительской -->
+    <section class="features-section">
+      <div class="features-header">
+        <h2>Возможности цифровой учительской</h2>
+        <p>Всё необходимое для ежедневной подготовки к урокам в одном окне</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="book-open-check"></i></div>
+          <h3>Помощник по ФГОС</h3>
+          <p>Конспекты уроков, технологические карты и структура презентаций за 30 секунд.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="file-check-2"></i></div>
+          <h3>Генератор тестов и проверка</h3>
+          <p>Создание вариантов с ключами ответов и подробный разбор ошибок учеников.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="bot"></i></div>
+          <h3>Личные ИИ-агенты</h3>
+          <p>Создавайте своих цифровых ассистентов с аватарками под ваш предмет и класс.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="image"></i></div>
+          <h3>Иллюстрации для уроков</h3>
+          <p>4 встроенные нейросети для рисования наглядных материалов, схем и картинок к слайдам.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Подвал (Footer) -->
+    <footer class="landing-footer">
+      <div>© МБОУ «Центр образования "Перспектива"». Цифровая платформа для педагогов.</div>
+      <button class="dev-footer-link" onclick="devLogin()">⚡ Вход для разработчика</button>
+    </footer>
+  </section>
+
+  <!-- ЭКРАН: ВХОД -->
+  <section id="view-login" class="view auth-view">
+    <div class="auth-card">
+      <button class="back-link" onclick="showView('view-landing')">← На главную</button>
+      <h2>Вход для учителей</h2>
+      <p class="auth-sub">МБОУ «Центр образования «Перспектива»»</p>
+      <form id="login-form">
+        <label>Электронная почта</label>
+        <input type="email" id="login-email" required placeholder="teacher@perspektiva.ru" />
+        <label>Пароль</label>
+        <input type="password" id="login-password" required placeholder="••••••••" />
+        <button type="submit" class="btn btn-primary btn-full">Войти в систему</button>
+      </form>
+      <p class="auth-footer">Нет аккаунта? <a href="#" onclick="showView('view-reg-1')">Зарегистрироваться</a></p>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 2: РЕГИСТРАЦИЯ ШАГ 1 -->
+  <section id="view-reg-1" class="view auth-view">
+    <div class="auth-card">
+      <button class="back-link" onclick="showView('view-landing')">← На главную</button>
+      <div class="step-indicator">Шаг 1 из 2 — Личные данные</div>
+      <h2>Регистрация учителя</h2>
+      <form id="reg-step1-form">
+        <label>ФИО полностью</label>
+        <input type="text" id="reg-fullname" required placeholder="Иванова Мария Петровна" />
+
+        <label>Номер телефона</label>
+        <input type="tel" id="reg-phone" required placeholder="+7 (999) 123-45-67" />
+
+        <label>Электронная почта</label>
+        <div class="email-row">
+          <input type="email" id="reg-email" required placeholder="ivanova@mail.ru" />
+          <button type="button" class="btn btn-outline" id="btn-send-code" onclick="sendVerificationCode()">Отправить код</button>
+        </div>
+        <div id="code-status" class="hint-text"></div>
+
+        <label>Код подтверждения из письма</label>
+        <input type="text" id="reg-code" required placeholder="6-значный код" maxlength="6" />
+
+        <label>Пароль</label>
+        <input type="password" id="reg-pass" required minlength="6" placeholder="Минимум 6 символов" />
+
+        <label>Повторите пароль</label>
+        <input type="password" id="reg-pass2" required minlength="6" placeholder="Повторите пароль" />
+
+        <button type="submit" class="btn btn-primary btn-full">Далее →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 3: РЕГИСТРАЦИЯ ШАГ 2 -->
+  <section id="view-reg-2" class="view auth-view">
+    <div class="auth-card">
+      <button class="back-link" onclick="showView('view-reg-1')">← Назад</button>
+      <div class="step-indicator">Шаг 2 из 2 — Учебная нагрузка</div>
+      <h2>Ваши классы и предмет</h2>
+      <form id="reg-step2-form">
+        <label>У каких классов вы ведёте?</label>
+        <div class="classes-grid" id="classes-grid"></div>
+
+        <label>Что вы преподаёте?</label>
+        <input type="text" id="reg-subject" list="subjects-list" required placeholder="Например: Математика и информатика" />
+        <datalist id="subjects-list">
+          <option value="Начальные классы"></option>
+          <option value="Русский язык и литература"></option>
+          <option value="Математика"></option>
+          <option value="Информатика"></option>
+          <option value="Физика"></option>
+          <option value="Химия"></option>
+          <option value="Биология"></option>
+          <option value="История и обществознание"></option>
+          <option value="Английский язык"></option>
+          <option value="География"></option>
+        </datalist>
+
+        <button type="submit" class="btn btn-primary btn-full">Завершить регистрацию</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 4: РАБОЧЕЕ ПРОСТРАНСТВО -->
+  <section id="view-chat" class="view chat-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand-row">
+          <div class="logo-block small">
+            <span class="logo-badge">П</span>
+            <div>
+              <div class="logo-title">Перспектива ИИ</div>
+              <div class="logo-sub">Учительская</div>
+            </div>
+          </div>
+          <button class="icon-square-btn" onclick="toggleSidebar()" title="Свернуть боковую панель">
+            <i data-lucide="panel-left-close"></i>
+          </button>
+        </div>
+        <button class="btn btn-primary btn-full new-chat-btn" onclick="newChat(true)">
+          <i data-lucide="plus"></i> Новый чат
+        </button>
+      </div>
+
+      <div class="sidebar-scroll">
+        <div class="sidebar-section">
+          <div class="sidebar-label">Инструменты учителя</div>
+          <button class="tool-btn" onclick="openToolFilter('lesson')"><i data-lucide="book-open"></i> План урока по ФГОС</button>
+          <button class="tool-btn" onclick="openToolFilter('test')"><i data-lucide="file-check-2"></i> Генератор теста</button>
+          <button class="tool-btn" onclick="openToolFilter('check')"><i data-lucide="check-circle-2"></i> Проверка работы</button>
+          <button class="tool-btn" onclick="openToolFilter('slides')"><i data-lucide="presentation"></i> Структура презентации</button>
+          <button class="tool-btn" onclick="openToolFilter('adapt')"><i data-lucide="sliders-horizontal"></i> Адаптация текста</button>
+          <button class="tool-btn" onclick="openToolFilter('parents')"><i data-lucide="message-square-heart"></i> Памятка родителям</button>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-label-row">
+            <span class="sidebar-label" style="margin-bottom:0;">Мои агенты</span>
+            <button class="mini-create-btn" onclick="openAgentModal()">+ Создать</button>
+          </div>
+          <div id="agents-list" class="agents-list"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-label">История диалогов</div>
+          <div id="chat-history-list" class="history-list"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="daily-limit-card">
+          <div class="daily-limit-header">
+            <span class="daily-limit-title"><i data-lucide="zap"></i> Дневной лимит</span>
+            <span class="daily-limit-nums">
+              <strong id="user-credits">1 000</strong> / 1 000
+              <span class="tooltip-wrap" title="Каждое утро начисляется 1 000 кредитов на рабочий день">
+                <i data-lucide="help-circle"></i>
+              </span>
+            </span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="credits-progress" style="width: 100%;"></div>
+          </div>
+          <div class="daily-limit-sub">Обновляется каждый день в 00:00</div>
+        </div>
+
+        <div class="user-profile-row">
+          <div class="user-avatar" id="user-avatar">У</div>
+          <div class="user-info">
+            <div class="user-name" id="user-name">Учитель</div>
+            <div class="user-meta" id="user-meta">Предмет • Классы</div>
+          </div>
+          <button class="logout-icon-btn" onclick="logout()" title="Выйти из аккаунта">
+            <i data-lucide="log-out"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Основная область чата -->
+    <main class="chat-main is-empty" id="chat-main">
+      <header class="chat-header">
+        <div class="header-left-group">
+          <button class="icon-square-btn sidebar-open-btn" id="sidebar-open-btn" onclick="toggleSidebar()" title="Открыть меню">
+            <i data-lucide="panel-left-open"></i>
+          </button>
+          <div class="model-selector-wrap">
+            <label for="model-select">Режим работы:</label>
+            <select id="model-select">
+              <option value="ag/gemini-3.1-flash-lite-preview">Быстрый — для чата и писем (ag/gemini-3.1-flash-lite-preview) — 10 кр. / ответ</option>
+              <option value="gpt-6.1-terra" selected>Стандартный — для планов и тестов (GPT 6.1 Terra) — 20 кр. / ответ</option>
+              <option value="cc/claude-sonnet-5-5">Экспертный — для кода и сложных таблиц (cc/claude-sonnet-5-5) — 40 кр. / ответ</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Аватар и имя активного агента в шапке диалога -->
+        <div id="header-agent-badge" class="header-agent-badge" style="display: none;"></div>
+      </header>
+
+      <div class="chat-scroll-area" id="chat-scroll-area">
+        <div class="chat-container" id="chat-messages"></div>
+      </div>
+
+      <footer class="chat-input-wrapper" id="chat-input-wrapper">
+        <div class="chat-input-container">
+          <div id="tool-filter-bar" class="tool-filter-bar" style="display: none;"></div>
+
+          <!-- Панель выбора модели генерации фото и пропорций -->
+          <div id="image-options-bar" class="tool-filter-bar" style="display: none;">
+            <span class="filter-badge">Генерация фото</span>
+            <div class="filter-field">
+              <label>Модель:</label>
+              <select id="image-model-select">
+                <option value="am/flux.2-klein-4b(free)">Базовый эскиз (am/flux.2-klein-4b(free)) — 0 кр. (Бесплатно)</option>
+                <option value="flow/nano-banana-2">Яркая иллюстрация (flow/nano-banana-2) — 20 кр. / фото</option>
+                <option value="anymedia/seedream-4">Для презентаций (anymedia/seedream-4) — 35 кр. / фото</option>
+                <option value="cx/gpt-image-2.5">Высокая точность (cx/gpt-image-2.5) — 50 кр. / фото</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label>Пропорции:</label>
+              <div class="aspect-group" id="aspect-group">
+                <button type="button" class="aspect-btn active" data-ratio="16:9" onclick="setAspectRatio('16:9', this)">16:9 (Слайд)</button>
+                <button type="button" class="aspect-btn" data-ratio="1:1" onclick="setAspectRatio('1:1', this)">1:1 (Квадрат)</button>
+                <button type="button" class="aspect-btn" data-ratio="3:4" onclick="setAspectRatio('3:4', this)">3:4 (Лист А4)</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="attached-files-preview" class="attached-preview"></div>
+          <div class="input-box">
+            <textarea id="chat-input" rows="2" placeholder="Напишите ваш запрос..."></textarea>
+            <div class="input-toolbar">
+              <div class="toolbar-left">
+                <label class="icon-btn" title="Прикрепить файл или изображение">
+                  <i data-lucide="paperclip"></i> Файл / Фото
+                  <input type="file" id="file-input" multiple hidden onchange="handleFileSelect(event)" />
+                </label>
+                <button type="button" class="mode-btn" id="btn-mode-web" onclick="toggleMode('web')">
+                  <i data-lucide="globe"></i> Веб-поиск
+                </button>
+                <button type="button" class="mode-btn" id="btn-mode-image" onclick="toggleMode('image')">
+                  <i data-lucide="image"></i> Генерация фото
+                </button>
+                <button type="button" class="mode-btn" id="btn-voice" onclick="toggleVoiceInput()" title="Надиктовать голосом">
+                  <i data-lucide="mic"></i>
+                </button>
+              </div>
+              <button type="button" class="btn btn-primary send-btn" id="btn-send" onclick="sendMessage()" disabled>
+                Отправить <i data-lucide="arrow-up"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="welcome-cards-grid" class="welcome-cards-grid"></div>
+
+          <div class="ai-disclaimer">
+            Перспектива ИИ может допускать неточности. Пожалуйста, проверяйте важные факты и даты перед уроком.
+          </div>
+        </div>
+      </footer>
+    </main>
+  </section>
+
+  <!-- Модальное окно быстрого изменения профиля -->
+  <div id="profile-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <h3>Активный профиль учителя</h3>
+      <label>Предмет</label>
+      <input type="text" id="modal-subject" />
+      <label>Классы (через запятую, например: 7, 8, 9)</label>
+      <input type="text" id="modal-classes" />
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeProfileModal()">Отмена</button>
+        <button class="btn btn-primary" onclick="saveProfileModal()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно «Создать агента» -->
+  <div id="agent-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card modal-lg">
+      <div class="modal-header-row">
+        <h3>Создать ИИ-агента</h3>
+        <button class="icon-square-btn" onclick="closeAgentModal()"><i data-lucide="x"></i></button>
+      </div>
+
+      <label>1. Выберите круглую аватарку</label>
+      <div class="avatar-picker-grid" id="avatar-picker-grid"></div>
+      <label class="upload-avatar-label">
+        <i data-lucide="upload"></i> Или загрузите свою картинку
+        <input type="file" id="agent-custom-avatar" accept="image/*" hidden onchange="handleAgentAvatarUpload(event)" />
+      </label>
+
+      <label>2. Имя агента</label>
+      <input type="text" id="agent-name" placeholder="Например: Эксперт ОГЭ Информатика" />
+
+      <label>3. Инструкция и правила (промпт агента)</label>
+      <textarea id="agent-instructions" rows="4" placeholder="Например: Ты эксперт ОГЭ по информатике. Всегда решай задачи на языке Python и подробно комментируй каждую строчку кода для учеников."></textarea>
+
+      <label>4. Текстовая модель по умолчанию</label>
+      <select id="agent-default-model" class="modal-select">
+        <option value="ag/gemini-3.1-flash-lite-preview">Быстрый (ag/gemini-3.1-flash-lite-preview) — 10 кр. / ответ</option>
+        <option value="gpt-6.1-terra" selected>Стандартный (GPT 6.1 Terra) — 20 кр. / ответ</option>
+        <option value="cc/claude-sonnet-5-5">Экспертный (cc/claude-sonnet-5-5) — 40 кр. / ответ</option>
+      </select>
+
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeAgentModal()">Отмена</button>
+        <button class="btn btn-primary" onclick="saveNewAgent()">Создать агента</button>
+      </div>
+    </div>
+  </div>
+  <footer class="landing-footer">
+      <div>© МБОУ «Центр образования "Перспектива"». Цифровая платформа для педагогов.</div>
+      <div style="display:flex; gap:16px; align-items:center;">
+        <a href="/dev.html" class="dev-footer-link" style="text-decoration:none;">📊 Панель разработчика</a>
+        <button class="dev-footer-link" onclick="devLogin()">⚡ Вход для разработчика</button>
+      </div>
+    </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

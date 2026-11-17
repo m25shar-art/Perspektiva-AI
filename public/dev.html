@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Панель разработчика — ЦО «Перспектива»</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #FAF9F6; color: #1F2937; padding: 32px 5%; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .title { font-size: 24px; font-weight: 700; }
+    .subtitle { font-size: 13px; color: #6B7280; margin-top: 4px; }
+    .btn {
+      padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: 1px solid #E5E7EB; background: #fff; color: #1F2937; text-decoration: none;
+    }
+    .btn-primary { background: #991B1B; color: #fff; border-color: #991B1B; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .stat-card {
+      background: #fff; border: 1px solid #EAE6DF; border-radius: 14px; padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .stat-label { font-size: 12px; color: #6B7280; font-weight: 600; text-transform: uppercase; }
+    .stat-value { font-size: 28px; font-weight: 700; margin-top: 6px; color: #111827; }
+
+    .table-wrap {
+      background: #fff; border: 1px solid #EAE6DF; border-radius: 16px; overflow-x: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #F3F4F6; }
+    th { background: #F3F1EC; font-weight: 600; color: #374151; font-size: 12px; text-transform: uppercase; }
+    tr:hover td { background: #FAF9F6; }
+    .badge {
+      display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;
+      background: #FEE2E2; color: #991B1B;
+    }
+    @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div>
+      <div class="title">Панель разработчика — ЦО «Перспектива»</div>
+      <div class="subtitle">Мониторинг регистраций учителей, запросов, токенов и дневных кредитов</div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-primary" onclick="loadStats()">Обновить данные</button>
+      <a href="/" class="btn">← На сайт</a>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Всего учителей</div>
+      <div class="stat-value" id="sum-users">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Всего запросов</div>
+      <div class="stat-value" id="sum-requests">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Потрачено токенов</div>
+      <div class="stat-value" id="sum-tokens">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Списано кредитов</div>
+      <div class="stat-value" id="sum-credits">0</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ФИО</th>
+          <th>Эл. почта</th>
+          <th>Телефон</th>
+          <th>Предмет / Классы</th>
+          <th>Запросов</th>
+          <th>Токенов потрачено</th>
+          <th>Кредитов (потрачено / осталось)</th>
+        </tr>
+      </thead>
+      <tbody id="users-tbody">
+        <tr><td colspan="7" style="text-align:center; color:#6B7280;">Загрузка...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    async function loadStats() {
+      const res = await fetch('/api/dev/stats');
+      const data = await res.json();
+      const users = data.users || [];
+
+      document.getElementById('sum-users').textContent = users.length;
+      document.getElementById('sum-requests').textContent = users.reduce((s, u) => s + u.totalRequests, 0).toLocaleString('ru-RU');
+      document.getElementById('sum-tokens').textContent = users.reduce((s, u) => s + u.tokensUsed, 0).toLocaleString('ru-RU');
+      document.getElementById('sum-credits').textContent = users.reduce((s, u) => s + u.creditsSpentTotal, 0).toLocaleString('ru-RU');
+
+      const tbody = document.getElementById('users-tbody');
+      if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#6B7280;">Пока нет зарегистрированных пользователей</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = users.map(u => `
+        <tr>
+          <td><strong>${u.fullName}</strong></td>
+          <td>${u.email}</td>
+          <td>${u.phone}</td>
+          <td>${u.subject} (${(u.classes || []).join(', ')} кл.)</td>
+          <td>${u.totalRequests}</td>
+          <td>${u.tokensUsed.toLocaleString('ru-RU')}</td>
+          <td>
+            <span class="badge">-${u.creditsSpentTotal} кр.</span>
+            <span style="color:#16A34A; font-weight:600; margin-left:6px;">Осталось: ${u.dailyCreditsRemaining} / 1 000</span>
+          </td>
+        </tr>
+      `).join('');
+    }
+    loadStats();
+  </script>
+</body>
+</html>
